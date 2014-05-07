@@ -1,0 +1,107 @@
+How to Build ABox2.
+
+ABox2 only builds for Win32 machines running at least a Pentium 1 or better.
+It will build and run just fine on a Win64 system -- but as a 32 bit app.
+ABox is built from a command line. Here is how to do it.
+
+
+_short_answer_
+
+    On a command line, navigate to where you unpacked the ABox2 source code.
+
+    If you have nmake:                              nmake RELEASEBUILD
+
+    If you have Python3.3 and MASM32:               makeabox.py
+
+    If you have Python3.3 but don't have MASM32:    edit makeabox.py to match what you do have
+
+    If you have MASM32 but don't have Python3.3:    buildabox.bat
+
+
+_long_answer_
+
+You will need several items:
+
+    a) The source code.
+    b) A MASM 6.14 compatible assembler and compatible linker.
+    c) Win32 link libraries.
+    d) A script, batch file or make tool to manage the build.
+
+Details:
+
+    a) If you're reading this you probably have the source code. Unpack,
+    preserving the directory structure, if you haven't already done so.
+
+    b) The assembler must be at least MASM 6.14 compatible. The Microsoft
+    assembler is called 'ML.EXE'. ABox2 has been built on later versions
+    (ver 9.0) with no problems. Ver 6.14, however, is sufficient.
+
+    Typicaly, if you have ML.EXE, you will also have a matching linker
+    LINK.EXE. ABox has been linked successfully with ver 9.0, but version 5.12
+    is sufficient.
+
+    There are several different ways to get the assembler and linker.
+
+        i) Purchase a Microsoft VisualStudio package. Double check before
+        hand that the MASM assembler is included. This is usually the case in
+        a Visual C package.
+
+        ii) Download and install a Microsoft SDK or a 'Lite' version of a
+        VisualStudio. Again, double check that MASM is included. Typically a
+        Platform SDK (PSDK) with Visual C will include MASM. Typically a
+        Device Driver SDK (DDK) will include MASM. Be sure to check the Win32
+        link libraries (see below) are included too.
+
+        iii) <RECOMENDED> Download and install the MASM32 software suite from
+
+            <masm32.com>
+
+        Masm32 is an on-line comunity of assembler programmers dedicated to
+        the X86 langugage and the Win32 API. The downloadable Masm32 package
+        includes MASM ver 6.14, LINK ver 5.12 and the Win32 libraries. It also
+        includes many instructional documents about assembly langague and
+        MASM, as well as a large collection library code, examples and custom
+        tools.
+
+    c) ABox2 can not be built without the Win32 link libraries. Obtaining
+    the .lib files can be problematic. Not all Microsoft free VisualStudio
+    packages include them. The PSDK or DDK _may_ include them, but it is a
+    good idea to check first -- if the package doesn't include Win32 link
+    libraries, then don't bother with it.
+
+    The MASM32 package _DOES_ include and install the Win32 link libraries.
+
+    d) If you have installed one of the Microsoft VisualStudio, SDK, or DDK,
+    then you probably have NMAKE.EXE.
+
+        nmake RELEASEBUILD
+
+    MASM32 does _not_ include nmake. If you have Python3.3 (or better)
+    installed on your system, you can run
+
+        makeabox.py
+
+    makeabox.py is configured for MASM32 installed at its default location.
+    If you installed it someplace else, edit makeabox.py accordingly. Note
+    that makeabox.py is a hastily hacked together script that barely gets
+    the job done. It does, however, check for newer/later file times -- so it
+    can make do for a develoment tool (where you're editing source code), but
+    it certainly doesn't try to live up to nmake or make.
+
+    If you're not using MASM32, but have Python3.3, you can edit makeabox.py
+    to use a different assembler and linker. Depending on what you're using,
+    you may have to re-work the _args dictionaries to match your tools.
+
+    If you have MASM32 but don't have Python, there is a dos batch file that
+    blugeons its way through a build.
+
+        buildabox.bat
+
+    Although the batch file is not suitable for a development tool, it will
+    allow you to at least build the code. If you don't have MASM32, but have
+    some other assembler, the .bat file can be edited accordingly.
+
+
+That's it -- Happy Building
+--A
+
